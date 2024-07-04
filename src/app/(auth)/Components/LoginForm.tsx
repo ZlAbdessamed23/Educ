@@ -11,7 +11,7 @@ export default function LoginForm() {
     const initialValue : LoginUser = {
         email : "",
         password : "",
-        userRole : "",
+        role : "",
         signIn(){
             signIn(this);
         },
@@ -35,8 +35,9 @@ export default function LoginForm() {
                 label="Your Role in the Institution"
                 placeholder="Select a role"
                 className="max-w-xs"
+                value={inputs.role}
                 onChange={(e) => handleInputsChange(e)}
-                name='userRole'
+                name='role'
                 variant='bordered'
                 color='secondary'
                 fullWidth={true}

@@ -1,5 +1,22 @@
+"use client"
+
 import { Link ,Button } from "@nextui-org/react";
 import { offers } from "./types/constants";
+import { useEffect } from "react";
+import { Offer } from "./types/types";
+import { makeOffer } from "./api/ApiContext";
+
+
+async function makeTheFirstOffer () {
+  const offer: Offer = {
+    offerNumber: 1,
+    maxTeacher: 10,
+    maxStudent: 5,
+  };
+  await makeOffer(offer);
+};
+
+
 
 export default function Home() {
   return (
@@ -29,6 +46,8 @@ export default function Home() {
           </Button>
         </section>
       ))}
+
+      <Button color="danger" variant="shadow" onClick={makeTheFirstOffer}>MakeOffer</Button>
     </div>
   );
 }

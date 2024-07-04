@@ -8,17 +8,20 @@ import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 export default function RegisterForm() {
+    const searchParam = useSearchParams();
+    const offer = searchParam.get("offer");
+
     const initialValue : RegisterUser = {
         fullName : "",
         email : "",
         password : "",
+        offerNumber: offer === "free" ? 1 : (offer === "premium" ? 2 : 1),
+        schoolName: "",
         signUp() {
             signUp(this);
         },
     };
     const [inputs , setInputs] = useState<RegisterUser>(initialValue);
-    const searchParam = useSearchParams();
-    const offer = searchParam.get("offer");
 
     function handleInputsChange(e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         setInputs({...inputs , [e.target.name] : e.target.value});
@@ -29,9 +32,6 @@ export default function RegisterForm() {
         inputs.signUp();
     };
 
-    useEffect(() => {
-        console.log(offer);
-    });
 
   return (
     <div className='w-1/3 mx-auto '>
@@ -39,13 +39,21 @@ export default function RegisterForm() {
             <Input className='text-white' color='secondary' variant='bordered' type='text' label="Name" name='fullName' value={inputs.fullName} onChange={(e) => handleInputsChange(e)} />
             <Input className='text-white' color='secondary' variant='bordered' type='email' label="Email" name='email' value={inputs.email} onChange={(e) => handleInputsChange(e)} />
             <Input className='text-white' color='secondary' variant='bordered' type='password' label="Password" name='password' value={inputs.password} onChange={(e) => handleInputsChange(e)} />
+            <Input className='text-white' color='secondary' variant='bordered' type='text' label="School Name" name='schoolName' value={inputs.schoolName} onChange={(e) => handleInputsChange(e)} />
             {
                 !offer &&  <Select
                 label="Your Plan Within the App"
                 placeholder="Select a Plan"
                 className="max-w-xs"
-                onChange={(e) => handleInputsChange(e)}
-                name='userRole'
+                onChange={(e) => {
+                    if(e.target.value === "free"){
+                        setInputs({...inputs , offerNumber : 1})
+                    }
+                    else if(e.target.value === "premium"){
+                        setInputs({...inputs , offerNumber : 2})
+                    };
+                }}
+                name='offerNumber'
                 variant='bordered'
                 color='secondary'
                 fullWidth={true}

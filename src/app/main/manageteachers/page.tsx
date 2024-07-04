@@ -1,8 +1,9 @@
 import React from 'react'
 import TeachersDataGrid from '../Components/TeachersDataGrid'
 import { Teacher } from '@/app/types/types';
+import { getAllLevels } from '@/app/api/ApiContext';
 
-export default function ManageTeachers() {
+export default async function ManageTeachers() {
 
     const teachers: Teacher[] = [
         {id:"sawlaksw" , fullName: "John Doe", email: "john@example.com", subject: "Math", level: "High School", state: "active" },
@@ -27,7 +28,8 @@ export default function ManageTeachers() {
         
     ];
 
-
+    const levels = await getAllLevels();
+    console.log(levels);
 
   return (
     <div className='p-4'>

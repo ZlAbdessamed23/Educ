@@ -4,19 +4,20 @@ import { IconType } from "react-icons";
 export type User  = {
     id?:string;
     fullName : string;
-    email : string;   
+    email : string;
 };
 
 interface LoginUser extends User {
     fullName? : string;
     password : string;
-    userRole : string;
+    role : string;
     signIn() : void; 
 };
 
 interface RegisterUser extends User {
     password : string;
-    offre ?: string; 
+    offerNumber ?: number; 
+    schoolName : string;   
     signUp() : void; 
 };
 
@@ -24,6 +25,13 @@ interface offer {
     title : string;
     pros : Array<string>;
     price : string;
+};
+
+
+interface Offer {
+    offerNumber: number;
+    maxTeacher: number;
+    maxStudent: number;
 };
 
 export type Role = {
