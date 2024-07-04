@@ -32,17 +32,11 @@ export async function getTasksCount() {
 };
 
 export async function getAllLevels() {
-    const levels = await fetch(`${baseUrl}/admin/getAllLevels` , {
-        credentials : "include",
-        headers : {
-            'Content-Type' : 'application/json',
-            
-        },
+    const response = await fetch("http://localhost:3000//admin/countStudents", {
         method: "GET",
-        cache : "no-cache",
-        
+        credentials: "include", // Ensures cookies are sent
     });
-    return levels.json();
+    return response.json();
 };
 
 
