@@ -6,12 +6,12 @@ import { VscFileSubmodule } from "react-icons/vsc";
 import DataCard from '../Components/DataCard';
 import LineChartDisplay from '../Components/LineChartDisplay';
 import BarChartDisplay from '../Components/BarChartDisplay';
-import { getStudentsCount, getTasksCount } from '@/app/api/ApiContext';
+import { getAllLevels, getStudentsCount, getTasksCount } from '@/app/api/ApiContext';
 
 export default async function AdminDashboard() {
 
-  // const studentsNumber = await getStudentsCount();
-  // console.log(studentsNumber);
+  const studentsNumber = await getAllLevels();
+  console.log(studentsNumber);
 
   const data : adminJsonObj = {
     studentsNbr: 100,
